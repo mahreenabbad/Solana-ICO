@@ -1,0 +1,90 @@
+Wrote new keypair to /home/km-00039/.config/solana/id.json
+==========================================================================
+pubkey: 6vn8njy3exmVQf4xV5G76Z1xJg4cuD7ohQrfW9xrwYe1
+==========================================================================
+Save this seed phrase and your BIP39 passphrase to recover your new keypair:
+lunar mouse moment total curve purchase damp credit account swamp ask drop
+
+//airdrop
+solana airdrop 2 
+
+//get program id 
+
+solana address -k target/deploy/zak_coin-keypair.json
+
+
+//create new program
+cd programs
+anchor new calc
+
+// compile and deploy a new program
+anchor build -p calc
+anchor deploy -p calc
+
+~/.config/solana/id.json
+
+// Point Solana CLI to Phantom keypair -use phantom for deployment
+solana config set --keypair ./new_program-keypair.json
+
+
+// Get the program ID from your keypair
+solana-keygen pubkey ./new_program-keypair.json
+
+// Use your keypair as program authority
+anchor build
+anchor deploy --program-keypair ./new_program-keypair.json
+
+//check its executable or not
+solana account CRb4bz1HSNaGtZX6qxuFrCYfnpND9cDu5ey2REqZuLNE --url https://api.devnet.solana.com
+
+
+///check if .so file created
+ls -la target/deploy/
+
+
+//directory structure
+ls -la programs/zakat_coin/
+ls -la programs/zakat_coin/src/
+cat programs/zakat_coin/Cargo.toml
+
+
+//build using carg0 build sbf = .so file
+cd programs/zakat_coin
+cargo build-sbf --manifest-path Cargo.toml --sbf-out-dir ../../target/deploy
+
+
+
+
+
+
+
+//get deployed program id
+zak-coin solana address -k target/deploy/dco-keypair.json
+
+
+//clean specific program
+rm -rf target/deploy/soulbound-*
+rm -rf target/idl/soulbound.json
+
+rm target/deploy/marketplace-keypair.json
+
+solana-keygen new -o target/deploy/soulbound-keypair.json
+
+
+solana address -k target/deploy/soulbound-keypair.json
+
+/////////
+solana program show BtrtcnJXk7vRPJJT6KiH7osLRdKezkHCM5jLdLBcUsBb --url devnet
+
+///////////////////
+The Mint account created by createMint() only stores:
+
+mintAuthority
+
+supply
+
+decimals
+
+freezeAuthority
+
+There is no native field for name or symbol like ERC-20 on Ethereum.

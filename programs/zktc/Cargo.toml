@@ -1,0 +1,33 @@
+[package]
+name = "zktc"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "zktc"
+
+[dependencies]
+anchor-lang = "0.31.1"
+anchor-spl = { version = "0.31.1", features = ["token"] }
+
+[workspace.dependencies]
+solana-program = "^2.3.8"  
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = [
+    "anchor-lang/idl-build",
+    "anchor-spl/idl-build"
+]
+
+
+# Add these to silence warnings
+custom-heap = []
+custom-panic = []
+anchor-debug = []

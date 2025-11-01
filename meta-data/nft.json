@@ -1,0 +1,12 @@
+{
+  "name": "Hold To Give",
+  "symbol": "HTG",
+  "description": "A non-transferable NFT",
+  "image": "https://red-electoral-chickadee-62.mypinata.cloud/ipfs/bafkreiccuskxg2kycf6dbemahkpjsg45eftqiuk34zn2c53zlig4f7yu3e",
+  "attributes": [
+    {
+      "trait_type": "Type",
+      "value": "Soulbound"
+    }
+  ]
+}

@@ -1,0 +1,531 @@
+{
+  "version": "0.1.0",
+  "name": "dco",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "state",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "tokenPrice",
+          "type": "u128"
+        },
+        {
+          "name": "dcoEndTime",
+          "type": "i64"
+        },
+        {
+          "name": "zcw",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "injectSupply",
+      "accounts": [
+        {
+          "name": "state",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "from",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "releaseZktc",
+      "accounts": [
+        {
+          "name": "state",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "caller",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "buyerTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "donationAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "donateToZcw",
+      "accounts": [
+        {
+          "name": "state",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "caller",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "zcwTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdraw",
+      "accounts": [
+        {
+          "name": "state",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ownerTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "addReleaser",
+      "accounts": [
+        {
+          "name": "state",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newReleaser",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "removeReleaser",
+      "accounts": [
+        {
+          "name": "state",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "oldReleaser",
+          "type": "publicKey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "DcoState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "zkTokenMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "vault",
+            "type": "publicKey"
+          },
+          {
+            "name": "tokenPrice",
+            "type": "u128"
+          },
+          {
+            "name": "tokenSold",
+            "type": "u128"
+          },
+          {
+            "name": "totalDonations",
+            "type": "u128"
+          },
+          {
+            "name": "dcoEndTime",
+            "type": "i64"
+          },
+          {
+            "name": "zcw",
+            "type": "publicKey"
+          },
+          {
+            "name": "releasers",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "Initialized",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "zkTokenMint",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "vault",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "tokenPrice",
+          "type": "u128",
+          "index": false
+        },
+        {
+          "name": "dcoEndTime",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "zcw",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "SupplyInjected",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "ZktcReleased",
+      "fields": [
+        {
+          "name": "caller",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "buyer",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "donationAmount",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "DonationSent",
+      "fields": [
+        {
+          "name": "caller",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "zcw",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "Withdrawn",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "ReleaserAdded",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "newReleaser",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "ReleaserRemoved",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "oldReleaser",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "You are not Authorized"
+    },
+    {
+      "code": 6001,
+      "name": "TokenPriceMustBeGreaterThanZero",
+      "msg": "Token price must be greater than zero"
+    },
+    {
+      "code": 6002,
+      "name": "AmountMustBeGreaterThanZero",
+      "msg": "Amount must be greater than zero"
+    },
+    {
+      "code": 6003,
+      "name": "NoTokensRemaining",
+      "msg": "No tokens remaining"
+    },
+    {
+      "code": 6004,
+      "name": "InsufficientBalance",
+      "msg": "Insufficient balance"
+    },
+    {
+      "code": 6005,
+      "name": "NoBalanceToWithdraw",
+      "msg": "No balance to withdraw"
+    },
+    {
+      "code": 6006,
+      "name": "TransferFailed",
+      "msg": "Transfer failed"
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientTokens",
+      "msg": "Insufficient tokens"
+    },
+    {
+      "code": 6008,
+      "name": "TransactionAlreadyProcessed",
+      "msg": "Transaction already processed"
+    },
+    {
+      "code": 6009,
+      "name": "GlobalReleaseTimeNotReached",
+      "msg": "Global release time not reached"
+    },
+    {
+      "code": 6010,
+      "name": "CannotWithdrawBeforeGlobalRelease",
+      "msg": "Cannot withdraw before global release"
+    },
+    {
+      "code": 6011,
+      "name": "DcoNotActive",
+      "msg": "DCO is not active"
+    },
+    {
+      "code": 6012,
+      "name": "InvalidAddress",
+      "msg": "Invalid address"
+    },
+    {
+      "code": 6013,
+      "name": "NoDonationsMade",
+      "msg": "No donations made"
+    },
+    {
+      "code": 6014,
+      "name": "MathOverflow",
+      "msg": "Math overflow"
+    },
+    {
+      "code": 6015,
+      "name": "AmountTooLarge",
+      "msg": "Amount too large to fit into u64"
+    },
+    {
+      "code": 6016,
+      "name": "ReleasersFull",
+      "msg": "Releasers list full"
+    },
+    {
+      "code": 6017,
+      "name": "InvalidTokenMint",
+      "msg": "Invalid token mint"
+    }
+  ]
+}
