@@ -2,8 +2,6 @@ import { Keypair ,PublicKey} from "@solana/web3.js";
 import bs58 from "bs58";
 import "dotenv/config";
 
-
-
 // pahntom wallet  4
 // const base58Secret = process.env.PHANTOM_WALLET_KEY;
 
