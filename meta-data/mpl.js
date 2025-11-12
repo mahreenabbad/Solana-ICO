@@ -20,6 +20,7 @@ const userWallet = umi.eddsa.createKeypairFromSecretKey(secretKey);
 const userWalletSigner = createSignerFromKeypair(umi, userWallet);
 
 
+
 const metadata = {
     name: "Zakat Coin",
      symbol: "ZKT",
