@@ -16,6 +16,7 @@ const secretKeyString = fs.readFileSync(secretKeyPath, "utf8");
 const secretKeyArray = JSON.parse(secretKeyString);
 const secretKey = new Uint8Array(secretKeyArray);
 
+
 const userWallet = umi.eddsa.createKeypairFromSecretKey(secretKey);
 const userWalletSigner = createSignerFromKeypair(umi, userWallet);
 
