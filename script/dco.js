@@ -7,7 +7,6 @@ import { getAssociatedTokenAddress,
 import * as fs from "fs";
 import * as path from "path";
 
-
 import "dotenv/config";
 import { fileURLToPath } from "url";
 import {  Wallet } from "@project-serum/anchor";
