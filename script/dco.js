@@ -16,6 +16,7 @@ const PROGRAM_ID = new PublicKey("CEHTQCjD4A4z6MYRjXydYvFhnz6s5E5Wha8XvH9xvFXM")
 const CLUSTER_URL = "https://api.devnet.solana.com";
 // const CLUSTER_URL = "https://solana-devnet.rpcpool.com"; // alternative
 
+
 // Get IDL
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
