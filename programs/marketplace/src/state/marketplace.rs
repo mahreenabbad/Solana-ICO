@@ -1,5 +1,4 @@
 use anchor_lang::prelude::*;
-
 #[account]
 pub struct Marketplace {
     pub admin: Pubkey,
