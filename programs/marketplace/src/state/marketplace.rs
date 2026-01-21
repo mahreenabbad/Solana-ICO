@@ -9,6 +9,7 @@ pub struct Marketplace {
     pub name: String, //Set this at max length of 32
 }
 
+
 impl Space for Marketplace {
     const INIT_SPACE: usize = 8 + 32 + 2 + 1 + 1 + 1 + (4 + 32);
 }
